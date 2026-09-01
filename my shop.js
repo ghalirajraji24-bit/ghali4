@@ -1,0 +1,1 @@
+localStorage.setItem("cart", JSON.stringify([...(JSON.parse(localStorage.getItem("cart")) || []), {name: "T-Shirt", price: 250}]));

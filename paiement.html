@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dar Kenza - Choix du Paiement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f4e9;
+            color: #063b3b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #063b3b;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .amount-box {
+            background: #f8f4e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+
+        .amount-box span {
+            display: block;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .amount-box strong {
+            font-size: 26px;
+            color: #063b3b;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .option-label:hover {
+            border-color: #063b3b;
+        }
+
+        .option-label input[type="radio"] {
+            accent-color: #063b3b;
+            width: 18px;
+            height: 18px;
+        }
+
+        .payment-method-content {
+            display: none;
+            text-align: left;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+        }
+
+        .bank-details {
+            background: #f4f8f8;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #063b3b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .pay-btn {
+            width: 100%;
+            background: #063b3b;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        .pay-btn:hover {
+            background: #0b5151;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-card">
+        <div class="logo-brand">DAR KENZA</div>
+        
+        <div class="amount-box">
+            <span>Montant de la commande</span>
+            <strong id="display-total">0 DH</strong>
+        </div>
+
+        <!-- CHOIX DU MODE DE PAIEMENT -->
+        <div class="payment-options">
+            <label class="option-label">
+                <input type="radio" name="payment_method" value="cod" checked onclick="switchMethod('cod')">
+                💵 Paiement à la livraison
+            </label>
+
+            <label class="option-label">
+                <input type="radio" name="payment_method" value="transfer" onclick="switchMethod('transfer')">
+                🏦 Virement Bancaire
+            </label>
+        </div>
+
+        <!-- 1. PAIEMENT A LA LIVRAISON -->
+        <div id="method-cod" class="payment-method-content" style="display: block;">
+            <p style="font-size: 14px; color: #555; margin-bottom: 15px;">
+                Vous réglerez le montant total en espèces directement au livreur lors de la réception de votre colis.
+            </p>
+            <button class="pay-btn" onclick="sendOrderFormspree('Paiement à la livraison')">CONFIRMER LA COMMANDE</button>
+        </div>
+
+        <!-- 2. VIREMENT BANCAIRE -->
+        <div id="method-transfer" class="payment-method-content">
+            <div class="bank-details">
+                <strong>Coordonnées bancaires Dar Kenza :</strong><br>
+                • <strong>Banque :</strong> CIH Bank<br>
+                • <strong>RIB :</strong> 230 780 0000000000000000 00<br>
+                • <strong>Titulaire :</strong> Dar Kenza SARL<br><br>
+                <small>Effectuez le virement puis cliquez sur le bouton pour confirmer.</small>
+            </div>
+            <button class="pay-btn" onclick="sendOrderFormspree('Virement Bancaire')">J'AI EFFECTUÉ LE VIREMENT</button>
+        </div>
+
+    </div>
+
+    <script>
+        let orderData = JSON.parse(localStorage.getItem("currentOrder")) || {};
+        document.getElementById("display-total").textContent = (orderData.total || 0) + " DH";
+
+        function switchMethod(method) {
+            document.querySelectorAll('.payment-method-content').forEach(el => el.style.display = 'none');
+            document.getElementById('method-' + method).style.display = 'block';
+        }
+
+        // ENVOI DE LA COMMANDE PAR MAIL VIA FORMSPREE
+        async function sendOrderFormspree(modePaiement) {
+            if (!orderData || !orderData.cart) {
+                alert("Erreur : Panier introuvable.");
+                return;
+            }
+
+            let detailsProduits = orderData.cart.map(item => `${item.name} (${item.price} DH)`).join(", ");
+
+            let formData = new FormData();
+            formData.append("Nom Client", orderData.clientName || "Non renseigné");
+            formData.append("Téléphone", orderData.phone || "Non renseigné");
+            formData.append("Adresse de Livraison", orderData.address || "Non renseignée");
+            formData.append("Mode de Paiement", modePaiement);
+            formData.append("Détails Produits", detailsProduits);
+            formData.append("Total Commande", (orderData.total || 0) + " DH");
+
+            try {
+                let response = await fetch("https://formspree.io/f/xbgjrndb", {
+                    method: "POST",
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    alert("✅ Commande envoyée avec succès par e-mail ! Merci pour votre achat.");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("currentOrder");
+                    window.location.href = "darkenza.html";
+                } else {
+                    alert("❌ Une erreur est survenue lors de l'envoi de la commande.");
+                }
+            } catch (error) {
+                alert("❌ Erreur de réseau lors de la connexion à Formspree.");
+            }
+        }
+    </script>
+</body>
+</html>

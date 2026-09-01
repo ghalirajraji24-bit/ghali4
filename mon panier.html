@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dar Kenza - Mon panier</title>
+
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f8f3ec;
+            color: #063b3b;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* TOP BAR */
+
+        .top-bar {
+            background: #063b3b;
+            color: white;
+            text-align: center;
+            padding: 9px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 100px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f3ec;
+            border-bottom: 1px solid #e4d8ca;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #063b3b;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .logo small {
+            display: block;
+            text-align: center;
+            font-size: 8px;
+            letter-spacing: 5px;
+            color: #063b3b;
+            margin-top: 5px;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: #063b3b;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 7px;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: #063b3b;
+            transition: .3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* CART ICON */
+
+        .cart-icon {
+            width: 42px;
+            height: 42px;
+            border: 1px solid #063b3b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #063b3b;
+            position: relative;
+        }
+
+        .cart-icon i {
+            font-size: 20px;
+        }
+
+        .cart-number {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: #063b3b;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+        }
+
+        /* TITLE */
+
+        .page-title {
+            text-align: center;
+            padding: 70px 20px 45px;
+        }
+
+        .page-title span {
+            color: #063b3b;
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .page-title h1 {
+            font-size: 48px;
+            font-weight: normal;
+            margin: 12px 0;
+        }
+
+        .page-title p {
+            color: #063b3b;
+            font-size: 14px;
+        }
+
+        /* CART */
+
+        .cart-container {
+            width: 84%;
+            margin: auto;
+            padding-bottom: 90px;
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            gap: 30px;
+        }
+
+        /* ITEMS */
+
+        .cart-items {
+            background: white;
+            padding: 30px;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #063b3b;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cart-header h2 {
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+        .cart-header span {
+            font-size: 12px;
+            color: #063b3b;
+        }
+
+        /* PRODUCT */
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 110px 1fr auto;
+            gap: 20px;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #063b3b;
+            animation: appear .4s ease;
+        }
+
+        .cart-image {
+            width: 110px;
+            height: 100px;
+            overflow: hidden;
+            background: #063b3b;
+        }
+
+        .cart-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-info h3 {
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .item-info p {
+            font-size: 12px;
+            color: #063b3b;
+            margin-bottom: 14px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quantity button {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #063b3b;
+            background: beige;
+            cursor: pointer;
+            font-size: 16px;
+            color: #063b3b;
+        }
+
+        .quantity button:hover {
+            background: #063b3b;
+            color: white;
+        }
+
+        .quantity span {
+            font-size: 13px;
+        }
+
+        .item-right {
+            text-align: right;
+        }
+
+        .item-price {
+            font-size: 17px;
+            font-weight: bold;
+            color: #063b3b;
+            margin-bottom: 15px;
+        }
+
+        .remove-btn {
+            border: none;
+            background: none;
+            color: red;
+            font-family: Georgia, serif;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            color: red;
+        }
+
+        /* EMPTY */
+
+        .empty-cart {
+            text-align: center;
+            padding: 70px 20px;
+            display: none;
+        }
+
+        .empty-cart i {
+            font-size: 55px;
+            color: #063b3b;
+            margin-bottom: 15px;
+        }
+
+        .empty-cart h2 {
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        .empty-cart p {
+            color: #063b3b;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #063b3b;
+            color: white;
+            padding: 13px 20px;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            background: #063b3b;
+            color: white;
+            padding: 35px;
+            height: fit-content;
+            position: sticky;
+            top: 125px;
+        }
+
+        .summary h2 {
+            font-size: 28px;
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid beige;
+            font-size: 13px;
+        }
+
+        .summary-row span:last-child {
+            font-weight: bold;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            font-size: 21px;
+        }
+
+        .total-price {
+            color: beige;
+            font-weight: bold;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid beige;
+            background: beige;
+            color: #4a2d22;
+            font-family: Georgia, serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .checkout-btn:hover {
+            background: transparent;
+            color: beige;
+        }
+
+        /* FORMULAIRE */
+
+        .order-form {
+            display: none;
+            width: 84%;
+            margin: 0 auto 90px;
+            background: white;
+            padding: 40px;
+            animation: appear .5s ease;
+        }
+
+        .order-form h2 {
+            font-weight: normal;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #063b3b;
+            background: beige;
+            font-family: Georgia, serif;
+            outline: none;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #063b3b;
+        }
+
+        .confirm-btn {
+            background: #063b3b;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-family: Georgia, serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .confirm-btn:hover {
+            background: #063b3b;
+        }
+
+        /* SUCCESS */
+
+        .success {
+            display: none;
+            background: #e3eddf;
+            color: #48603f;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #063b3b;
+            color: white;
+            padding: 50px 8% 25px;
+        }
+
+        .footer {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer h2 {
+            color: beige;
+            margin-bottom: 15px;
+        }
+
+        .footer h3 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .footer p,
+        .footer a {
+            color: beige;
+            font-size: 12px;
+            line-height: 1.7;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid beige;
+            margin-top: 40px;
+            padding-top: 20px;
+            color: beige;
+            font-size: 10px;
+        }
+
+        /* ANIMATION */
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 800px) {
+
+            .nav-items {
+                display: none;
+            }
+
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+        }
+
+        @media(max-width: 550px) {
+
+            .cart-container,
+            .order-form {
+                width: 92%;
+            }
+
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+            }
+
+            .cart-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .item-right {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .page-title h1 {
+                font-size: 38px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="top-bar">
+    Livraison à domicile • Mohammédia et alentours
+</div>
+
+
+<header>
+
+    <div class="logo">
+
+        Dar Kenza
+
+        <small>
+            BISCUITERIE
+        </small>
+
+    </div>
+
+
+    <nav>
+
+        <ul class="nav-items">
+
+            <li>
+                <a href="index.html" class="nav-link">
+                    ACCUEIL
+                </a>
+            </li>
+
+            <li>
+                <a href="offer.html" class="nav-link">
+                    NOS OFFRES
+                </a>
+            </li>
+
+            <li>
+                <a href="shop.html" class="nav-link">
+                    NOS PRODUITS
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html" class="nav-link">
+                    CONTACT
+                </a>
+            </li>
+
+            <li>
+                <a href="mon panier.html" class="nav-link active">
+                    MON PANIER
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <a href="mon panier.html" class="cart-icon">
+
+        <i class='bx bx-shopping-bag'></i>
+
+        <span class="cart-number" id="cartNumber">
+            0
+        </span>
+
+    </a>
+
+</header>
+
+
+<main>
+
+
+    <section class="page-title">
+
+        <span>
+            DAR KENZA
+        </span>
+
+        <h1>
+            Mon panier
+        </h1>
+
+        <p>
+            Retrouvez ici les produits que vous souhaitez commander.
+        </p>
+
+    </section>
+
+
+    <!-- PANIER -->
+
+    <section class="cart-container">
+
+
+        <div class="cart-items">
+
+            <div class="cart-header">
+
+                <h2>
+                    Votre sélection
+                </h2>
+
+                <span id="itemCount">
+                    0 article
+                </span>
+
+            </div>
+
+
+            <div id="cartProducts"></div>
+
+
+            <div class="empty-cart" id="emptyCart">
+
+                <i class='bx bx-shopping-bag'></i>
+
+                <h2>
+                    Votre panier est vide
+                </h2>
+
+                <p>
+                    Découvrez nos produits et ajoutez vos gourmandises préférées.
+                </p>
+
+                <a href="shop.html" class="shop-btn">
+                    DÉCOUVRIR NOS PRODUITS
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESUME -->
+
+        <div class="summary">
+
+            <h2>
+                Résumé
+            </h2>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Sous-total
+                </span>
+
+                <span id="subtotal">
+                    0 DH
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Livraison
+                </span>
+
+                <span id="delivery">
+                    30 DH
+                </span>
+
+            </div>
+
+
+            <div class="total">
+
+                <span>
+                    Total
+                </span>
+
+                <span class="total-price" id="total">
+                    30 DH
+                </span>
+
+            </div>
+
+
+            <button
+                class="checkout-btn"
+                onclick="showOrderForm()">
+
+                PASSER LA COMMANDE
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMULAIRE COMMANDE -->
+
+    <section class="order-form" id="orderForm">
+
+        <h2>
+            Finaliser votre commande
+        </h2>
+
+
+        <form id="commandeForm" action="https://formspree.io/f/xbgjrndb" method="POST">
+
+            <input type="hidden" name="Commande_Details" id="formspreeCartDetails">
+            <input type="hidden" name="Total_A_Payer" id="formspreeTotal">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        NOM COMPLET
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Nom"
+                        id="clientName"
+                        placeholder="Votre nom"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        TÉLÉPHONE
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="Telephone"
+                        id="phone"
+                        placeholder="06 XX XX XX XX"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        VILLE
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Ville"
+                        id="city"
+                        placeholder="Mohammédia"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        MODE DE PAIEMENT
+                    </label>
+
+                    <select name="Mode_Paiement" required>
+
+                        <option value="">
+                            Choisir
+                        </option>
+
+                        <option>
+                            Paiement à la livraison
+                        </option>
+
+                        <option>
+                            Paiement en ligne
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        ADRESSE DE LIVRAISON
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Adresse"
+                        id="address"
+                        placeholder="Votre adresse complète"
+                        required>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        REMARQUE
+                    </label>
+
+                    <textarea
+                        name="Remarque"
+                        placeholder="Une précision concernant votre commande ?">
+                    </textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="confirm-btn">
+
+                CONFIRMER LA COMMANDE
+
+            </button>
+
+
+            <div class="success" id="success">
+
+                ✓ Votre commande a été enregistrée avec succès.
+                <br>
+                Nous vous contacterons prochainement pour confirmer la livraison.
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer">
+
+
+        <div>
+
+            <h2>
+                Dar Kenza
+            </h2>
+
+            <p>
+                Biscuiterie et pâtisserie marocaine
+                préparées avec passion.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                BOUTIQUE
+            </h3>
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <a href="offer.html">
+                Nos offres
+            </a>
+
+            <a href="shop.html">
+                Nos produits
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                CONTACT
+            </h3>
+
+            <p>
+                Mohammédia, Maroc
+            </p>
+
+            <p>
+                Livraison à domicile
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Dar Kenza — Tous droits réservés
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* ==========================================
+   RÉCUPÉRER LE PANIER (Sécurisé & Alignement Clé)
+========================================== */
+
+function getCart() {
+    try {
+        let cartData = localStorage.getItem("cart") || localStorage.getItem("darKenzaCart");
+        let parsed = JSON.parse(cartData);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+let cart = getCart();
+
+
+/* ==========================================
+   AFFICHER LE PANIER
+========================================== */
+
+function displayCart() {
+
+    const container = document.getElementById("cartProducts");
+    const emptyCart = document.getElementById("emptyCart");
+
+    if (!cart || cart.length === 0) {
+
+        container.innerHTML = "";
+        emptyCart.style.display = "block";
+        document.getElementById("itemCount").textContent = "0 article";
+
+        updateSummary();
+        return;
+    }
+
+
+    emptyCart.style.display = "none";
+    container.innerHTML = "";
+
+
+    cart.forEach((product, index) => {
+
+        const quantity = parseInt(product.quantity, 10) || 1;
+        const price = parseFloat(product.price) || 0;
+        const itemTotal = price * quantity;
+
+        const item = document.createElement("div");
+        item.className = "cart-item";
+
+        item.innerHTML = `
+
+            <div class="cart-image">
+
+                <img
+                src="${product.image || 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=500&q=80'}"
+                alt="${product.name}">
+
+            </div>
+
+
+            <div class="item-info">
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+                <p>
+                    ${price} DH / unité
+                </p>
+
+
+                <div class="quantity">
+
+                    <button onclick="changeQuantity(${index}, -1)">
+                        −
+                    </button>
+
+                    <span>
+                        ${quantity}
+                    </span>
+
+                    <button onclick="changeQuantity(${index}, 1)">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="item-right">
+
+                <div class="item-price">
+                    ${itemTotal} DH
+                </div>
+
+                <button
+                class="remove-btn"
+                onclick="removeProduct(${index})">
+
+                    Supprimer
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(item);
+
+    });
+
+
+    const totalItems = cart.reduce((total, product) => {
+        let q = parseInt(product.quantity, 10);
+        return total + (isNaN(q) ? 0 : q);
+    }, 0);
+
+
+    document.getElementById("itemCount").textContent =
+        totalItems + (totalItems > 1 ? " articles" : " article");
+
+
+    updateSummary();
+
+}
+
+
+/* ==========================================
+   QUANTITÉ
+========================================== */
+
+function changeQuantity(index, amount) {
+
+    let q = parseInt(cart[index].quantity, 10) || 1;
+    q += amount;
+
+    if (q <= 0) {
+        cart.splice(index, 1);
+    } else {
+        cart[index].quantity = q;
+    }
+
+    saveCart();
+    displayCart();
+
+}
+
+
+/* ==========================================
+   SUPPRIMER
+========================================== */
+
+function removeProduct(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+    displayCart();
+
+}
+
+
+/* ==========================================
+   CALCUL TOTAL
+========================================== */
+
+function updateSummary() {
+
+    let subtotal = cart.reduce((total, product) => {
+        let q = parseInt(product.quantity, 10) || 0;
+        let p = parseFloat(product.price) || 0;
+        return total + (p * q);
+    }, 0);
+
+
+    let delivery = subtotal > 0 ? 30 : 0;
+    let total = subtotal + delivery;
+
+
+    document.getElementById("subtotal").textContent = subtotal + " DH";
+    document.getElementById("delivery").textContent = delivery + " DH";
+    document.getElementById("total").textContent = total + " DH";
+
+    const totalItems = cart.reduce((total, product) => {
+        let q = parseInt(product.quantity, 10);
+        return total + (isNaN(q) ? 0 : q);
+    }, 0);
+
+    document.getElementById("cartNumber").textContent = totalItems;
+
+}
+
+
+/* ==========================================
+   SAUVEGARDER
+========================================== */
+
+function saveCart() {
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("darKenzaCart", JSON.stringify(cart));
+
+}
+
+
+/* ==========================================
+   AFFICHER FORMULAIRE
+========================================== */
+
+function showOrderForm() {
+
+    if (!cart || cart.length === 0) {
+        alert("Votre panier est vide.");
+        return;
+    }
+
+    const form = document.getElementById("orderForm");
+    form.style.display = "block";
+
+    form.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ==========================================
+   CONFIRMER COMMANDE (Formspree + AJAX)
+========================================== */
+
+document.getElementById("commandeForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const form = this;
+    const name = document.getElementById("clientName").value;
+    const phone = document.getElementById("phone").value;
+    const city = document.getElementById("city").value;
+    const address = document.getElementById("address").value;
+
+    let subtotal = cart.reduce((total, product) => {
+        let q = parseInt(product.quantity, 10) || 0;
+        let p = parseFloat(product.price) || 0;
+        return total + (p * q);
+    }, 0);
+
+    const grandTotal = subtotal + 30;
+
+    let detailsProduits = cart.map(item => `${item.name} (x${item.quantity}) - ${item.price * item.quantity} DH`).join(" | ");
+    document.getElementById("formspreeCartDetails").value = detailsProduits;
+    document.getElementById("formspreeTotal").value = grandTotal + " DH";
+
+    const order = {
+        client: name,
+        phone: phone,
+        city: city,
+        address: address,
+        products: cart,
+        total: grandTotal,
+        date: new Date().toLocaleString()
+    };
+
+    localStorage.setItem("lastOrder", JSON.stringify(order));
+
+    const data = new FormData(form);
+    
+    fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        document.getElementById("success").style.display = "block";
+        cart = [];
+        saveCart();
+        displayCart();
+        form.reset();
+    }).catch(error => {
+        document.getElementById("success").style.display = "block";
+        cart = [];
+        saveCart();
+        displayCart();
+        form.reset();
+    });
+
+});
+
+
+/* ==========================================
+   INITIALISATION
+========================================== */
+
+displayCart();
+
+</script>
+
+
+</body>
+
+</html>

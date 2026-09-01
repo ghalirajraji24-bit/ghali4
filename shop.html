@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dar Kenza - Nos produits</title>
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f8f3ec;
+            color: #063b3b;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: #063b3b;
+            color: white;
+            text-align: center;
+            padding: 9px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* HEADER */
+        header {
+            height: 100px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f3ec;
+            border-bottom: 1px solid #063b3b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color:  #063b3b;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .logo small {
+            display: block;
+            text-align: center;
+            font-size: 8px;
+            letter-spacing: 5px;
+            color: #063b3b;
+            margin-top: 5px;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: #063b3b;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 7px;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: #063b3b;
+            transition: .3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .cart {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #063b3b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #063b3b;
+            position: relative;
+        }
+
+        .cart span {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #063b3b;
+            color: white;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* PAGE TITLE */
+        .page-title {
+            text-align: center;
+            padding: 70px 20px 45px;
+        }
+
+        .page-title span {
+            color: #063b3b;
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .page-title h1 {
+            font-size: 48px;
+            font-weight: normal;
+            margin: 12px 0;
+        }
+
+        .page-title p {
+            color: #063b3b;
+            font-size: 14px;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 45px;
+            flex-wrap: wrap;
+        }
+
+        .category {
+            padding: 11px 20px;
+            border: 1px solid #063b3b;
+            color: #063b3b;
+            background: transparent;
+            cursor: pointer;
+            font-family: Georgia, serif;
+            font-size: 11px;
+            transition: .3s;
+        }
+
+        .category:hover,
+        .category.active {
+            background: #063b3b;
+            color: white;
+        }
+
+        /* PRODUCTS */
+        .products-container {
+            padding: 0 8% 90px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+            transition: .4s;
+            animation: appear .6s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(50, 30, 20, .12);
+        }
+
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: #063b3b;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+        }
+
+        .product:hover img {
+            transform: scale(1.06);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #063b3b;
+            color: white;
+            padding: 6px 10px;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .category-name {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: #063b3b;
+        }
+
+        .product-info h2 {
+            font-size: 20px;
+            font-weight: normal;
+            margin: 8px 0;
+        }
+
+        .product-info p {
+            color: #063b3b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .price {
+            color: #063b3b;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #063b3b;
+            color: white;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-family: Georgia, serif;
+            font-size: 10px;
+            transition: .3s;
+        }
+
+        .add-btn:hover {
+            background: #063b3b;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            background: #063b3b;
+            color: white;
+            padding: 50px 8% 25px;
+        }
+
+        .footer {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer h2 {
+            color: beige;
+            font-size: 27px;
+            margin-bottom: 15px;
+        }
+
+        .footer h3 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .footer p,
+        .footer a {
+            color: beige;
+            font-size: 12px;
+            line-height: 1.7;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid beige;
+            margin-top: 40px;
+            padding-top: 20px;
+            color: beige;
+            font-size: 10px;
+        }
+
+        @media(max-width:800px) {
+            .nav-items { display: none; }
+            .products { grid-template-columns: repeat(2, 1fr); }
+            .footer { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media(max-width:550px) {
+            .products { grid-template-columns: 1fr; }
+            .footer { grid-template-columns: 1fr; }
+            .page-title h1 { font-size: 38px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    Livraison à domicile • Mohammédia et alentours
+</div>
+
+<header>
+    <div class="logo">
+        Dar Kenza
+        <small>BISCUITERIE</small>
+    </div>
+
+    <nav>
+        <ul class="nav-items">
+            <li><a href="index.html" class="nav-link">ACCUEIL</a></li>
+            <li><a href="offer.html" class="nav-link">NOS OFFRES</a></li>
+            <li><a href="shop.html" class="nav-link active">NOS PRODUITS</a></li>
+            <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+            <li><a href="mon panier.html" class="nav-link">MON PANIER</a></li>
+        </ul>
+    </nav>
+
+    <a href="mon panier.html" class="cart">
+        <i class='bx bx-shopping-bag'></i>
+        <span id="cartCount">0</span>
+    </a>
+</header>
+
+<main>
+    <section class="page-title">
+        <span>NOTRE COLLECTION</span>
+        <h1>Nos produits</h1>
+        <p>Découvrez les gourmandises qui font la réputation de Dar Kenza.</p>
+    </section>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+        <button class="category active" onclick="filterProducts('all', this)">TOUS</button>
+        <button class="category" onclick="filterProducts('fekkas', this)">FEKKAS</button>
+        <button class="category" onclick="filterProducts('sables', this)">SABLÉS</button>
+        <button class="category" onclick="filterProducts('cookies', this)">COOKIES</button>
+        <button class="category" onclick="filterProducts('chocolat', this)">CHOCOLAT</button>
+    </div>
+
+    <section class="products-container">
+        <div class="products">
+
+            <article class="product" data-category="fekkas">
+                <div class="product-image">
+                    <span class="badge">BEST SELLER</span>
+                    <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=700&q=80" alt="Fekkas">
+                </div>
+                <div class="product-info">
+                    <span class="category-name">FEKKAS</span>
+                    <h2>Fekkas aux amandes</h2>
+                    <p>Fekkas traditionnel aux amandes, croustillant et savoureux.</p>
+                    <div class="product-bottom">
+                        <span class="price">35 DH</span>
+                        <button class="add-btn" onclick="addToCart(this, 'Fekkas aux amandes', 35, 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=700&q=80')">AJOUTER</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product" data-category="cookies">
+                <div class="product-image">
+                    <span class="badge">NOUVEAU</span>
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80" alt="Cookies">
+                </div>
+                <div class="product-info">
+                    <span class="category-name">COOKIES</span>
+                    <h2>Cookies chocolat</h2>
+                    <p>Des cookies généreux avec de délicieux morceaux de chocolat.</p>
+                    <div class="product-bottom">
+                        <span class="price">40 DH</span>
+                        <button class="add-btn" onclick="addToCart(this, 'Cookies chocolat', 40, 'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80')">AJOUTER</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product" data-category="sables">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=700&q=80" alt="Sablés">
+                </div>
+                <div class="product-info">
+                    <span class="category-name">SABLÉS</span>
+                    <h2>Sablés prestige</h2>
+                    <p>Des sablés fins et délicats pour toutes les occasions.</p>
+                    <div class="product-bottom">
+                        <span class="price">50 DH</span>
+                        <button class="add-btn" onclick="addToCart(this, 'Sablés prestige', 50, 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=700&q=80')">AJOUTER</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product" data-category="chocolat">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1548907040-4d42a42a7aab?auto=format&fit=crop&w=700&q=80" alt="Chocolat">
+                </div>
+                <div class="product-info">
+                    <span class="category-name">CHOCOLAT</span>
+                    <h2>Chocolat aux fruits secs</h2>
+                    <p>Une association gourmande de chocolat et fruits secs.</p>
+                    <div class="product-bottom">
+                        <span class="price">45 DH</span>
+                        <button class="add-btn" onclick="addToCart(this, 'Chocolat aux fruits secs', 45, 'https://images.unsplash.com/photo-1548907040-4d42a42a7aab?auto=format&fit=crop&w=700&q=80')">AJOUTER</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product" data-category="fekkas">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80" alt="Fekkas">
+                </div>
+                <div class="product-info">
+                    <span class="category-name">FEKKAS</span>
+                    <h2>Fekkas chocolat</h2>
+                    <p>Une version gourmande du traditionnel fekkas.</p>
+                    <div class="product-bottom">
+                        <span class="price">40 DH</span>
+                        <button class="add-btn" onclick="addToCart(this, 'Fekkas chocolat', 40, 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80')">AJOUTER</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product" data-category="cookies">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80" alt="Cookies">
+                </div>
+                <div class="product-info">
+                    <span class="category-name">COOKIES</span>
+                    <h2>Cookies pistache</h2>
+                    <p>Une recette gourmande à la pistache.</p>
+                    <div class="product-bottom">
+                        <span class="price">45 DH</span>
+                        <button class="add-btn" onclick="addToCart(this, 'Cookies pistache', 45, 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80')">AJOUTER</button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer">
+        <div>
+            <h2>Dar Kenza</h2>
+            <p>Biscuiterie et pâtisserie marocaine préparées avec passion.</p>
+        </div>
+        <div>
+            <h3>BOUTIQUE</h3>
+            <a href="index.html">Accueil</a>
+            <a href="offer.html">Nos offres</a>
+            <a href="shop.html">Nos produits</a>
+        </div>
+        <div>
+            <h3>CONTACT</h3>
+            <p>Mohammédia, Maroc</p>
+            <p>Livraison à domicile</p>
+        </div>
+        <div>
+            <h3>DAR KENZA</h3>
+            <p>Qualité</p>
+            <p>Tradition</p>
+            <p>Gourmandise</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 Dar Kenza — Tous droits réservés
+    </div>
+</footer>
+
+<script>
+// Récupération sécurisée du panier
+function getCart() {
+    try {
+        let cartData = localStorage.getItem('cart');
+        let parsed = JSON.parse(cartData);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+// Sauvegarde du panier
+function saveCart(cart) {
+    try {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    } catch (e) {
+        console.error("Erreur de sauvegarde:", e);
+    }
+}
+
+// Mise à jour du badge
+function updateCartBadge() {
+    let cart = getCart();
+    
+    // Calcul sécurisé de la quantité totale
+    let totalCount = cart.reduce((sum, item) => {
+        let qty = parseInt(item.quantity, 10);
+        return sum + (isNaN(qty) ? 0 : qty);
+    }, 0);
+
+    const cartCountElement = document.getElementById("cartCount");
+    if (cartCountElement) {
+        cartCountElement.textContent = totalCount;
+    }
+}
+
+// Ajout d'un produit au panier
+function addToCart(btnElement, name, price, image) {
+    let cart = getCart();
+
+    // S'assurer que le prix est bien un nombre
+    let numericPrice = parseFloat(price) || 0;
+
+    let existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+        existingItem.quantity = (parseInt(existingItem.quantity, 10) || 0) + 1;
+    } else {
+        cart.push({
+            name: name,
+            price: numericPrice,
+            image: image,
+            quantity: 1
+        });
+    }
+
+    saveCart(cart);
+    updateCartBadge();
+
+    // Feedback visuel du bouton
+    if (btnElement) {
+        let originalText = btnElement.textContent;
+        btnElement.textContent = "AJOUTÉ ✓";
+        btnElement.style.background = "#9b5036";
+
+        setTimeout(() => {
+            btnElement.textContent = originalText;
+            btnElement.style.background = "#4a2d22";
+        }, 1000);
+    }
+}
+
+// Filtrage par catégorie
+function filterProducts(category, button) {
+    document.querySelectorAll(".category").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    document.querySelectorAll(".product").forEach(product => {
+        if (category === "all" || product.dataset.category === category) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+}
+
+// Initialisation au chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="my shop.css">
+<script src="my shop.js" defer></script>
+</head>
+
+<body>
+ 
+</button>
+<header>
+    <h1>MY SHOP</h1>
+
+    <nav>
+        <a href="index.html">Home</a>
+       
+        <a href="mon panier.html">Mon panier 🛒</a>
+        
+    </nav>
+</header>
+
+<main>
+    <h2>Nos produits</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Produit 1">
+            <h3>sablet</h3>
+            <p>250 DH</p>
+
+           <button onclick="addToCart('sablet', 250)">
+    Ajouter au panier
+</button>
+
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({name: name, price: price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Produit ajouté au panier !");
+}
+</script>
+
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Produit 2">
+            <h3>fekkas</h3>
+            <p>700 DH</p>
+
+         <button onclick="addToCart('fekkas', 500)">
+    Ajouter au panier
+</button>
+
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({name: name, price: price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Produit ajouté au panier !");
+}
+</script>
+</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Produit 3">
+            <h3>boule de neige</h3>
+            <p>200 DH</p>
+<button onclick="addToCart('boule de neige', 200)">
+    Ajouter au panier
+</button>
+
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({name: name, price: price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Produit ajouté au panier !");
+}
+</script>
+</button>
+        </div>
+
+    </div>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>

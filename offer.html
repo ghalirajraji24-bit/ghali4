@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dar Kenza - Nos offres</title>
+
+<link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f8f3ec;
+    color: #063b3b;
+}
+
+a {
+    text-decoration: none;
+}
+
+.top-bar {
+    background: #063b3b;
+    color: white;
+    text-align: center;
+    padding: 9px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+header {
+    height: 100px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #063b3b;
+    background: #f8f3ec;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: #063b3b;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo small {
+    display: block;
+    color: #063b3b;
+    font-size: 8px;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+.nav-items {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-link {
+    color: #063b3b;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 7px;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #063b3b;
+    transition: .3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.page-title {
+    text-align: center;
+    padding: 70px 20px 50px;
+}
+
+.page-title span {
+    color: #063b3b;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.page-title h1 {
+    font-size: 48px;
+    font-weight: normal;
+    margin: 12px 0;
+}
+
+.page-title p {
+    color: #063b3b;
+    font-size: 14px;
+}
+
+.offers {
+    padding: 0 8% 90px;
+    display: grid;
+    gap: 30px;
+}
+
+.offer {
+    min-height: 360px;
+    background: #063b3b;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    animation: appear .7s ease;
+}
+
+.offer-info {
+    padding: 55px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+}
+
+.offer-info span {
+    color: #063b3b;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.offer-info h2 {
+    font-size: 42px;
+    font-weight: normal;
+    margin: 15px 0;
+}
+
+.offer-info p {
+    color: beige;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 420px;
+}
+
+.price {
+    margin: 20px 0;
+}
+
+.old-price {
+    color: #a89387;
+    text-decoration: line-through;
+    margin-right: 12px;
+}
+
+.new-price {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.offer-btn {
+    border: 1px solid white;
+    color: white;
+    padding: 12px 18px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.offer-btn:hover {
+    background: white;
+    color: #063b3b;
+}
+
+.offer-image {
+    overflow: hidden;
+}
+
+.offer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .6s;
+}
+
+.offer:hover .offer-image img {
+    transform: scale(1.05);
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+footer {
+    background: #063b3b;
+    color: white;
+    padding: 50px 8% 25px;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer h2 {
+    color: beige;
+}
+
+.footer h3 {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.footer p,
+.footer a {
+    color: beige;
+    font-size: 12px;
+    line-height: 1.7;
+    display: block;
+}
+
+.footer-bottom {
+    border-top: 1px solid beige;
+    margin-top: 40px;
+    padding-top: 20px;
+    color: beige;
+    font-size: 10px;
+}
+
+@media(max-width:700px) {
+
+    .nav-items {
+        display: none;
+    }
+
+    .offer {
+        grid-template-columns: 1fr;
+    }
+
+    .offer-image {
+        height: 250px;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="top-bar">
+    OFFRE SPÉCIALE • Livraison à domicile • Dar Kenza
+</div>
+
+
+<header>
+
+    <div class="logo">
+        Dar Kenza
+        <small>BISCUITERIE</small>
+    </div>
+
+    <nav>
+
+        <ul class="nav-items">
+
+            <li>
+                <a href="index.html" class="nav-link">
+                    ACCUEIL
+                </a>
+            </li>
+
+            <li>
+                <a href="offer.html" class="nav-link active">
+                    NOS OFFRES
+                </a>
+            </li>
+
+            <li>
+                <a href="shop.html" class="nav-link">
+                    NOS PRODUITS
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html" class="nav-link">
+                    CONTACT
+                </a>
+            </li>
+
+             <li>
+                <a href="mon panier.html" class="nav-link">
+                    MON PANIER
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+<section class="page-title">
+
+    <span>
+        À NE PAS MANQUER
+    </span>
+
+    <h1>
+        Nos offres
+    </h1>
+
+    <p>
+        Profitez de nos sélections gourmandes à prix spécial.
+    </p>
+
+</section>
+
+
+<section class="offers">
+
+
+    <article class="offer">
+
+        <div class="offer-info">
+
+            <span>
+                OFFRE LIMITÉE
+            </span>
+
+            <h2>
+                Coffret gourmand
+            </h2>
+
+            <p>
+                Un assortiment de nos meilleurs biscuits
+                pour partager un délicieux moment en famille
+                ou pour faire plaisir à vos proches.
+            </p>
+
+            <div class="price">
+
+                <span class="old-price">
+                    150 DH
+                </span>
+
+                <span class="new-price">
+                    120 DH
+                </span>
+
+            </div>
+
+            <a href="shop.html" class="offer-btn">
+                DÉCOUVRIR L'OFFRE
+            </a>
+
+        </div>
+
+
+        <div class="offer-image">
+
+            <img
+            src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80"
+            alt="Coffret gourmand">
+
+        </div>
+
+    </article>
+
+
+    <article class="offer">
+
+        <div class="offer-info">
+
+            <span>
+                OFFRE FAMILLE
+            </span>
+
+            <h2>
+                Douceur familiale
+            </h2>
+
+            <p>
+                Un assortiment généreux de fekkas,
+                sablés et cookies pour vos réunions
+                et moments de partage.
+            </p>
+
+            <div class="price">
+
+                <span class="old-price">
+                    200 DH
+                </span>
+
+                <span class="new-price">
+                    165 DH
+                </span>
+
+            </div>
+
+            <a href="shop.html" class="offer-btn">
+                VOIR LES PRODUITS
+            </a>
+
+        </div>
+
+
+        <div class="offer-image">
+
+            <img
+            src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80"
+            alt="Biscuits">
+
+        </div>
+
+    </article>
+
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer">
+
+        <div>
+
+            <h2>Dar Kenza</h2>
+
+            <p>
+                Biscuiterie et pâtisserie marocaine
+                préparées avec passion.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>BOUTIQUE</h3>
+
+            <a href="darkenza.html">Accueil</a>
+
+            <a href="shop.html">Nos produits</a>
+
+            <a href="offer.html">Nos offres</a>
+
+        </div>
+
+        <div>
+
+            <h3>CONTACT</h3>
+
+            <p>
+                Mohammédia, Maroc
+            </p>
+
+            <p>
+                Livraison à domicile
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Dar Kenza — Tous droits réservés
+    </div>
+
+</footer>
+
+</body>
+
+</html>

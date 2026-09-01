@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="2UEpxbFzRcP4KzeZGQi9UB4o0XoMHQIEV22zKIYrz7M" />
+    <title>Dar Kenza - Biscuiterie & Pâtisserie Marocaine</title>
+
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f8f3ec;
+            color: #063b3b;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .top-bar {
+            background: #063b3b;
+            color: white;
+            text-align: center;
+            padding: 9px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            height: 100px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #f8f3ec;
+
+            border-bottom: 1px solid #e5d9ce;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        .company-logo {
+            color: #063b3b;
+            font-size: 31px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+
+        .company-logo small {
+            display: block;
+            color: #063b3b;
+            font-size: 8px;
+            letter-spacing: 4px;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .nav-items {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+
+        .nav-link {
+            color: #063b3b;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            position: relative;
+
+            padding-bottom: 8px;
+
+            transition: .3s;
+        }
+
+
+        .nav-link:hover {
+            color: #063b3b;
+        }
+
+
+        .nav-link::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 0;
+            height: 2px;
+
+            background: #063b3b;
+
+            transition: .3s;
+        }
+
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+
+        /* =========================
+           HEADER ICONS
+        ========================= */
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+
+        .header-icons a {
+            color: #063b3b;
+            position: relative;
+
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid #d9cabb;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: .3s;
+        }
+
+
+        .header-icons a:hover {
+            background: #063b3b;
+            color: white;
+        }
+
+
+        .header-icons i {
+            font-size: 18px;
+        }
+
+        .menu-icon {
+            display: none;
+        }
+
+
+        .cart-number {
+            position: absolute;
+
+            top: -6px;
+            right: -6px;
+
+            width: 19px;
+            height: 19px;
+
+            border-radius: 50%;
+
+            background: #063b3b;
+
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 9px;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+
+            padding: 20px;
+
+            background: #fffdf9;
+
+            border-bottom: 1px solid #e5d9ce;
+        }
+
+
+        .categories a {
+            color: #063b3b;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            transition: .3s;
+        }
+
+
+        .categories a:hover {
+            color: #063b3b;
+        }
+
+
+        /* =========================
+           HERO SHOP
+        ========================= */
+
+        .shop-hero {
+            text-align: center;
+
+            padding: 70px 20px 55px;
+        }
+
+
+        .shop-hero span {
+            color: #063b3b;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            font-weight: bold;
+        }
+
+
+        .shop-hero h1 {
+            font-size: 50px;
+
+            font-weight: normal;
+
+            margin: 15px 0;
+        }
+
+
+        .shop-hero p {
+            color: #063b3b;
+
+            font-size: 14px;
+
+            max-width: 550px;
+
+            margin: auto;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           PRODUCTS
+        ========================= */
+
+        .products-section {
+            width: 84%;
+
+            margin: auto;
+
+            padding-bottom: 90px;
+        }
+
+
+        .products {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 28px;
+        }
+
+
+        .product {
+            background: white;
+
+            opacity: 0;
+
+            transform: translateY(30px);
+
+            transition:
+                opacity .6s ease,
+                transform .6s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .product.show {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        .product:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 15px 35px rgba(65, 39, 27, .12);
+        }
+
+
+        /* =========================
+           PRODUCT IMAGE
+        ========================= */
+
+        .product-image {
+            height: 280px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #eee3d8;
+        }
+
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform .6s ease;
+        }
+
+
+        .product:hover
+        .product-image img {
+            transform: scale(1.06);
+        }
+
+
+        .product-label {
+            position: absolute;
+
+            top: 15px;
+            left: 15px;
+
+            background: #063b3b;
+
+            color: white;
+
+            padding: 7px 10px;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+
+            z-index: 2;
+        }
+
+
+        /* =========================
+           PRODUCT INFO
+        ========================= */
+
+        .product-info {
+            padding: 22px;
+        }
+
+
+        .product-category {
+            color: #063b3b;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .product-info h3 {
+            font-size: 20px;
+
+            font-weight: normal;
+
+            margin-top: 8px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .product-bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .price {
+            color: #063b3b;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           ADD TO CART
+        ========================= */
+
+        .add-cart {
+            border: 1px solid #063b3b;
+
+            background: transparent;
+
+            color: #063b3b;
+
+            padding: 10px 15px;
+
+            font-family: Georgia, serif;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+
+            transition: all .3s ease;
+        }
+
+
+        .add-cart:hover {
+            background: #063b3b;
+
+            color: white;
+
+            transform: translateY(-2px);
+        }
+
+
+        .add-cart.added {
+            background: #6b8b68;
+
+            border-color: #6b8b68;
+
+            color: white;
+
+            transform: scale(1.05);
+        }
+
+
+        /* =========================
+           OFFER
+        ========================= */
+
+        .section-3 {
+            width: 84%;
+
+            margin: 0 auto 90px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background: #063b3b;
+
+            color: white;
+        }
+
+
+        .offer-info {
+            padding: 60px;
+        }
+
+
+        .offer-info > span {
+            color: #063b3b;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+        }
+
+
+        .offer-info h2 {
+            font-size: 46px;
+
+            font-weight: normal;
+
+            line-height: 1;
+
+            margin: 18px 0;
+        }
+
+
+        .offer-info p {
+            color: white;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            max-width: 400px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .offer-price {
+            margin-bottom: 25px;
+        }
+
+
+        .old-price {
+            color: white;
+
+            text-decoration: line-through;
+
+            margin-right: 10px;
+        }
+
+
+        .new-price {
+            color: white;
+
+            font-size: 25px;
+
+            font-weight: bold;
+        }
+
+
+        .offer-btn {
+            display: inline-block;
+
+            border: 1px solid white;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            transition: .3s;
+        }
+
+
+        .offer-btn:hover {
+            background: white;
+
+            color: #e6d9d4;
+        }
+
+
+        .offer-image {
+            height: 100%;
+            min-height: 400px;
+        }
+
+
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .section-4 {
+            width: 84%;
+
+            margin: 0 auto 90px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .service {
+            background: white;
+
+            padding: 30px;
+
+            display: flex;
+
+            gap: 18px;
+
+            align-items: center;
+        }
+
+
+        .service i {
+            font-size: 30px;
+
+            color: #063b3b;
+        }
+
+
+        .service h3 {
+            font-size: 15px;
+
+            font-weight: normal;
+
+            margin-bottom: 6px;
+        }
+
+
+        .service p {
+            font-size: 11px;
+
+            color: #063b3b;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #063b3b;
+
+            color: beige;
+
+            padding: 55px 8% 25px;
+        }
+
+
+        .footer-content {
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr;
+
+            gap: 45px;
+        }
+
+
+        .footer-logo {
+            font-size: 28px;
+
+            color: beige;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+
+        .footer-column h3 {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 20px;
+
+            color: beige;
+        }
+
+
+        .footer-column p,
+        .footer-column a {
+            color: beige;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+
+            display: block;
+
+            margin-bottom: 7px;
+        }
+
+
+        .footer-column a:hover {
+            color: beige;
+        }
+
+
+        .footer-bottom {
+            border-top: 1px solid beige;
+
+            margin-top: 40px;
+
+            padding-top: 20px;
+
+            color: beige;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 900px) {
+
+            .nav-items {
+                gap: 15px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .section-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width: 768px) {
+
+            header {
+                padding: 0 4%;
+                height: 80px;
+            }
+
+            .company-logo {
+                font-size: 24px;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .navbar {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #f8f3ec;
+                border-bottom: 1px solid #e5d9ce;
+                padding: 20px 0;
+            }
+
+            .navbar.active {
+                display: block;
+            }
+
+            .nav-items {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .categories {
+                overflow-x: auto;
+                justify-content: flex-start;
+                white-space: nowrap;
+            }
+
+            .shop-hero {
+                padding: 50px 20px;
+            }
+
+            .shop-hero h1 {
+                font-size: 40px;
+            }
+
+            .products-section {
+                width: 92%;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+
+            .section-3, .section-4 {
+                width: 92%;
+                grid-template-columns: 1fr;
+            }
+
+            .offer-info {
+                padding: 30px 20px;
+            }
+
+            .offer-info h2 {
+                font-size: 32px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="top-bar">
+
+    Livraison à domicile • Mohammédia et alentours • Bienvenue chez Dar Kenza
+
+</div>
+
+
+<header>
+
+
+    <a href="index.html" class="company-logo">
+
+        <span>Dar</span> Kenza
+
+        <small>
+            BISCUITERIE
+        </small>
+
+    </a>
+
+
+    <nav class="navbar">
+
+        <ul class="nav-items">
+
+            <li>
+                <a
+                    href="index.html"
+                    class="nav-link active">
+
+                    ACCUEIL
+
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="offer.html"
+                    class="nav-link">
+
+                    NOS OFFRES
+
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="shop.html"
+                    class="nav-link">
+
+                    NOS PRODUITS
+
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="contact.html"
+                    class="nav-link">
+
+                    CONTACT
+
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="mon panier.html"
+                    class="nav-link">
+
+                    MON PANIER
+
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <div class="header-icons">
+
+
+        <a href="contact.html">
+
+            <i class='bx bx-phone'></i>
+
+        </a>
+
+
+        <a href="mon panier.html">
+
+            <i class='bx bx-shopping-bag'></i>
+
+            <span class="cart-number">
+                0
+            </span>
+
+        </a>
+
+        <a href="#" id="mobile-menu-btn" class="menu-icon">
+            <i class='bx bx-menu'></i>
+        </a>
+
+
+    </div>
+
+
+</header>
+
+
+<div class="categories">
+
+    <a href="shop.html">
+        TOUS
+    </a>
+
+    <a href="shop.html">
+        BISCUITS
+    </a>
+
+    <a href="shop.html">
+        FEKKAS
+    </a>
+
+    <a href="shop.html">
+        SABLÉS
+    </a>
+
+    <a href="shop.html">
+        COOKIES
+    </a>
+
+    <a href="shop.html">
+        CHOCOLATS
+    </a>
+
+    <a href="shop.html">
+        GÂTEAUX
+    </a>
+
+    <a href="offer.html">
+        OFFRES
+    </a>
+
+</div>
+
+
+<main>
+
+
+<section class="shop-hero">
+
+    <span>
+        DAR KENZA
+    </span>
+
+    <h1>
+        Nos produits
+    </h1>
+
+    <p>
+        Découvrez notre sélection de biscuits,
+        fekkas, sablés et gourmandises préparés
+        avec soin.
+    </p>
+
+</section>
+
+
+<section class="products-section">
+
+
+    <div class="products">
+
+
+        <article class="product">
+
+            <div class="product-image">
+
+                <span class="product-label">
+                    BEST SELLER
+                </span>
+
+                <img
+                    src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=700&q=80"
+                    alt="Fekkas aux amandes"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    BISCUITERIE
+                </span>
+
+                <h3>
+                    Fekkas aux amandes
+                </h3>
+
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        35 DH
+                    </span>
+
+
+                    <button class="add-cart">
+                        AJOUTER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="product">
+
+            <div class="product-image">
+
+                <span class="product-label">
+                    NOUVEAUTÉ
+                </span>
+
+                <img
+                    src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80"
+                    alt="Cookies au chocolat"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    COOKIES
+                </span>
+
+                <h3>
+                    Cookies au chocolat
+                </h3>
+
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        40 DH
+                    </span>
+
+
+                    <button class="add-cart">
+                        AJOUTER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=700&q=80"
+                    alt="Sablés prestige"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    SABLÉS
+                </span>
+
+                <h3>
+                    Sablés prestige
+                </h3>
+
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        50 DH
+                    </span>
+
+
+                    <button class="add-cart">
+                        AJOUTER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=700&q=80"
+                    alt="Ghriba aux amandes"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    BISCUITERIE
+                </span>
+
+                <h3>
+                    Ghriba aux amandes
+                </h3>
+
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        40 DH
+                    </span>
+
+
+                    <button class="add-cart">
+                        AJOUTER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="product">
+
+            <div class="product-image">
+
+                <span class="product-label">
+                    POPULAIRE
+                </span>
+
+                <img
+                    src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80"
+                    alt="Sablés citron amandes"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    SABLÉS
+                </span>
+
+                <h3>
+                    Sablés citron-amandes
+                </h3>
+
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        45 DH
+                    </span>
+
+
+                    <button class="add-cart">
+                        AJOUTER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80"
+                    alt="Barres chocolat fruits secs"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    CHOCOLATS
+                </span>
+
+                <h3>
+                    Barres chocolat & fruits secs
+                </h3>
+
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        55 DH
+                    </span>
+
+
+                    <button class="add-cart">
+                        AJOUTER
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<section class="section-3">
+
+
+    <div class="offer-info">
+
+        <span>
+            OFFRE DU MOMENT
+        </span>
+
+
+        <h2>
+            Coffret
+            <br>
+            gourmand
+        </h2>
+
+
+        <p>
+            Découvrez notre sélection de gourmandises
+            Dar Kenza réunies dans un coffret à partager
+            ou à offrir.
+        </p>
+
+
+        <div class="offer-price">
+
+            <span class="old-price">
+                150 DH
+            </span>
+
+            <span class="new-price">
+                120 DH
+            </span>
+
+        </div>
+
+
+        <a
+            href="offer.html"
+            class="offer-btn">
+
+            DÉCOUVRIR L'OFFRE
+
+        </a>
+
+    </div>
+
+
+    <div class="offer-image">
+
+        <img
+            src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=80"
+            alt="Coffret gourmand"
+        >
+
+    </div>
+
+
+</section>
+
+
+
+<section class="section-4">
+
+
+    <div class="service">
+
+        <i class='bx bx-heart'></i>
+
+        <div>
+
+            <h3>
+                Préparé avec soin
+            </h3>
+
+            <p>
+                Des produits préparés avec attention.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="service">
+
+        <i class='bx bx-package'></i>
+
+        <div>
+
+            <h3>
+                Livraison
+            </h3>
+
+            <p>
+                Faites-vous livrer vos gourmandises.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="service">
+
+        <i class='bx bx-star'></i>
+
+        <div>
+
+            <h3>
+                Qualité Dar Kenza
+            </h3>
+
+            <p>
+                Votre satisfaction avant tout.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+
+    <div class="footer-content">
+
+
+        <div>
+
+            <div class="footer-logo">
+                Dar Kenza
+            </div>
+
+            <p>
+                Biscuiterie et pâtisserie marocaine
+                préparées avec passion.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                BOUTIQUE
+            </h3>
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <a href="shop.html">
+                Nos produits
+            </a>
+
+            <a href="offer.html">
+                Nos offres
+            </a>
+
+            <a href="mon panier.html">
+                Mon panier
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                INFORMATIONS
+            </h3>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="#">
+                Livraison
+            </a>
+
+            <a href="#">
+                Conditions
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                NOUS TROUVER
+            </h3>
+
+            <p>
+                MJR9+CCJ, Bd Al Houria
+            </p>
+
+            <p>
+                Mohammédia, Maroc
+            </p>
+
+            <p>
+                Livraison à domicile
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Dar Kenza — Tous droits réservés
+
+    </div>
+
+
+</footer>
+
+
+
+<script>
+
+/* =====================================
+   MENU MOBILE TOGGLE
+===================================== */
+
+const menuBtn = document.getElementById("mobile-menu-btn");
+const navbar = document.querySelector(".navbar");
+
+if (menuBtn && navbar) {
+    menuBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        navbar.classList.toggle("active");
+    });
+}
+
+
+/* =====================================
+   ANIMATION DES PRODUITS
+===================================== */
+
+const products = document.querySelectorAll(".product");
+
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    },
+    { threshold: 0.15 }
+);
+
+products.forEach((product) => {
+    observer.observe(product);
+});
+
+
+/* =====================================
+   RÉCUPÉRER LE PANIER DE FAÇON SÉCURISÉE
+===================================== */
+
+function getCart() {
+    try {
+        let cartData = localStorage.getItem("cart") || localStorage.getItem("darKenzaCart");
+        let parsed = JSON.parse(cartData);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+let cart = getCart();
+
+
+/* =====================================
+   COMPTEUR PRODUITS DU PANIER
+===================================== */
+
+const cartNumber = document.querySelector(".cart-number");
+
+function updateCartNumber() {
+    const total = cart.reduce((sum, product) => {
+        let q = parseInt(product.quantity, 10);
+        return sum + (isNaN(q) ? 0 : q);
+    }, 0);
+
+    if (cartNumber) {
+        cartNumber.textContent = total;
+    }
+}
+
+
+/* =====================================
+   SAUVEGARDE SYNCHRONISÉE
+===================================== */
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("darKenzaCart", JSON.stringify(cart));
+}
+
+
+/* =====================================
+   AJOUTER AU PANIER
+===================================== */
+
+const buttons = document.querySelectorAll(".add-cart");
+
+buttons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        const product = button.closest(".product");
+
+        const name = product.querySelector("h3").textContent.trim();
+
+        const priceText = product.querySelector(".price").textContent;
+        const price = parseFloat(priceText.replace("DH", "").trim()) || 0;
+
+        const image = product.querySelector("img").src;
+
+        const existingProduct = cart.find(item => item.name === name);
+
+        if (existingProduct) {
+            existingProduct.quantity = (parseInt(existingProduct.quantity, 10) || 0) + 1;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+
+        saveCart();
+        updateCartNumber();
+
+        // Animation bouton
+        const originalText = button.textContent;
+        button.textContent = "AJOUTÉ ✓";
+        button.classList.add("added");
+
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove("added");
+        }, 1200);
+
+    });
+
+});
+
+
+/* =====================================
+   INITIALISATION
+===================================== */
+
+updateCartNumber();
+
+</script>
+
+
+</body>
+
+</html>
